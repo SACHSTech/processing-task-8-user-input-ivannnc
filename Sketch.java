@@ -11,26 +11,73 @@ public class Sketch extends PApplet {
     size(400, 400);
   }
 
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
+  float r = 32;
+  float g = 32;
+  float b = 32;
+
+  float circleX = 150;
+  float circleY = 150;
+
+  String message = "";
+
   public void setup() {
-    background(210, 255, 173);
+    background(r, g, b);
+    textSize(30);
   }
 
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
-  public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
-  }
   
-  // define other methods down here.
-}
+  public void draw() {
+    if(mousePressed){
+      fill(0, 255, 255);
+      rect(mouseX, mouseY, 50, 30);
+      text(message, 25, 150);
+    }
+
+    fill(255, 102, 0);
+    textSize(50);
+    text(key, 100, 100);
+
+
+  }
+
+  public void mouseClicked() {
+    fill(255, 255, 255);
+    ellipse(mouseX, mouseY, 50, 50);
+    ellipse(mouseX - 15, mouseY, 20, 20);
+    ellipse(mouseX + 15, mouseY, 20, 20);
+    fill(0, 0, 0);
+    ellipse(mouseX - 15, mouseY, 10, 10);
+    ellipse(mouseX + 15, mouseY, 10, 10);
+  }
+
+  public void mouseWheel() {
+    r = 255;
+    g = 102;
+    b = 0;
+  }
+  public void keyPressed() {
+    if (keyPressed) {
+      if (keyCode == UP) {
+        circleY--;
+      }
+      else if (keyCode == DOWN) {
+        circleY++;
+      }
+      else if (keyCode == LEFT) {
+        circleX--;
+      }
+      else if (keyCode == RIGHT) {
+        circleX++;
+      }
+    }
+  
+    ellipse(circleX, circleY, 100, 100);
+    ellipse(circleX, circleY, 20, 20);
+
+  }
+
+  public void keyTyped() {
+    message += key;
+  }
+  }
+ 
